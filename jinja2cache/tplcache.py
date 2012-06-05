@@ -15,7 +15,7 @@ def is_dict(obj):
     return isinstance(obj, collections.Mapping)
 
 
-if JINJA2_CACHE_ENABLED and JINJA2_CACHE_BACKEND is None:
+if not JINJA2_CACHE_ENABLED or JINJA2_CACHE_BACKEND is None:
     cache = None
     bccache = None
 else:
