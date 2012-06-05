@@ -1,3 +1,5 @@
+import traceback
+
 from django.core.management.base import BaseCommand, CommandError
 from jinja2cache.tplcache import cache
 
@@ -11,7 +13,8 @@ class Command(BaseCommand):
                                "backend is defined\n")
         try:
             cache.clear()
-        except Exception, e:
-            raise CommandError(u"Failed to flush jinja2 template cache: %e\n" % e)
-
-        self.stdout.write("Successfully flushed jinja2 template cache\n")
+        except:
+            raise CommandError(u"Failed to flush jinja2 template cache: "
+                               u"\n%s" % (traceback.format_exc()))
+        else:
+            self.stdout.write("Successfully flushed jinja2 template cache\n")
